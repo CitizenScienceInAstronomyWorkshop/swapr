@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: swapr
+      hosts:
+        - localhost:27017
