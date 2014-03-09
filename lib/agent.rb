@@ -23,15 +23,55 @@ class Agent
 
       plogp[0] = 0.5*(pd+pl)*Math.log2(pd+pl)
       plogp[1] = 0.5*(1.0-pd+1.0-pl)*Math.log2(1.0-pd+1.0-pl)
-      set :contribution, (plogp[0] + plogp[1])
+      # set :contribution, (plogp[0] + plogp[1])
+  end
+
+  def update_confusion_unsupervised(user_said, lens_prob)
+    if user_said == "LENS"
+        pl_new = (pl * counts["lens"] + lens_prob)/(lens_prob+counts["lens"])
+        pl_new = [pl_new,pl_max].min
+        pl_new = [pl_new,pl_min].max
+        set :pl, pl_new
+
+
+        pd_new = (pd*counts["lens"] )/((1-lens_prob)+counts["duds"])
+        pd_new = [pd_new,pd_max].min
+        pd_new = [pd_new,pd_min].max
+        set :pd, pd_new
+
+        inc "counts.lens", 1
+        inc "counts.total", 1
+    else
+
+        pl_new = (pl*counts["lens"])/(lens_prob+counts["lens"])
+        pl_new = [pl_new,pl_max].min
+        pl_new = [pl_new,pl_min].max
+        set :pl, pl_new
+
+        pd_new = (pd*counts["duds"] + (1-lens_prob))/((lens_prob-1)+counts["duds"])
+        pd_new = [pd_new,pd_max].min
+        pd_new = [pd_new,pd_min].max
+        set :pd, pd_new
+
+        inc "counts.duds", 1
+        inc "counts.total", 1
+       
+    end
+
   end
 
   def update_confusion(user_said, actual)
+      
 
-      match = (user_said==actual) ? 1 : 0
-
-
-      if actual == "LENS"
+      if user_said=="LENS" and actual=="sim"
+        match = 1 
+      elsif user_said =="NOT" and actual =="dud"
+        match = 1
+      else
+        match = 0
+      end
+      
+      if actual == "sim"
         pl_new = (pl * counts["lens"] + match)/(1+counts["lens"])
         pl_new = [pl_new,pl_max].min
         pl_new = [pl_new,pl_min].max

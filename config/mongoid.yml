@@ -1,6 +1,6 @@
 development:
   sessions:
     default:
-      database: swapr
+      database: swapr_ph
       hosts:
         - localhost:27017

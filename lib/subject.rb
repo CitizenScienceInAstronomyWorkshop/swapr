@@ -1,15 +1,18 @@
-InitalPrior= 0.001
+InitalPrior= 2e-4
 
 class Subject
   include Mongoid::Document
 
-  field :ourobors_subject_id, type: String
+  field :ouroboros_subject_id, type: String
 
   field :classification_count,  type: Float,  default: 0.0
+
   field :kind,                  type: String, default: "unknown"
+  field :category,              type: String, default: "test"
   field :status,                type: String, default: "active"
   field :trajectory,            type: Array,  default: [InitalPrior]
-  field :probability,           type: Float,  default: 0.001
+  field :probability,           type: Float,  default: InitalPrior
+  field :url,                   type: String
 
   index "ourobors_subject_id" => 1
 
@@ -44,11 +47,11 @@ class Subject
   end
 
   def rejection_threshold
-    0.00001
+    1e-07
   end
 
   def detection_threshold
-    0.9
+    0.95
   end
 
 end
