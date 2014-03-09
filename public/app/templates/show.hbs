@@ -1,0 +1,16 @@
+<h2>{{controller.id}}</h2>
+<p> Seen by {{controller.subject.classification_count}} </p>
+
+<div class='image_container'>
+	<img class='subject-image' {{bind-attr src='controller.subject.url'}}>
+
+	{{#markings-svg fans=controller.fans id =contorller.id  }}{{/markings-svg}}
+
+	{{!-- <svg class='markings' width="840" height="648">
+		{{#each controller.fans}}
+  			<circle {{bindAttr cx=x}} {{bindAttr cy=y}} r="4" stroke="green" stroke-width="2" fill="yellow" />
+  		{{/each}}
+	</svg> --}}
+</div>
+
+

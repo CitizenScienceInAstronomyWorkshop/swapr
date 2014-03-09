@@ -1,0 +1,26 @@
+<div class='row'>
+	<div class='overall_stats col-md-2'>
+		<ul class='list-group subject-list'>
+			<li class='list-group-item'>Active: {{stats.active}}</li>
+			<li class='list-group-item'>Rejected: {{stats.rejected}}</li>
+			<li class='list-group-item'>Detected: {{stats.detected}}</li>
+			<li class='list-group-item'>Found Sims: {{stats.found_sims}}</li>
+			<li class='list-group-item'>Rejected duds: {{stats.rejected_duds}}</li>
+		</ul>
+	</div>
+	<div class='subejcts col-md-5'>
+		<ul class='list-group subject-list'>
+			{{#each subjects}}
+			<li class='list-group-item'>Id: {{ouroboros_subject_id}}</li>
+			{{/each}}
+		</ul>
+	</div>
+
+	<div class='subejcts col-md-5'>
+		<ul class='list-group user-list'>
+			{{#each users}}
+			<li class='list-group-item'>Id: {{user_id}}</li>
+			{{/each}}
+		</ul>
+	</div>
+</div>

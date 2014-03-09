@@ -1,0 +1,26 @@
+<div class ='row'>
+
+	<div class='selector col-md-4'>
+		<h3>Fans length : {{controller.fans.length}} {{red}}</h3>
+		<ul class='list-group subject-list'>
+			{{#each controller.fans}}
+				<li class='list-group-item'>{{#link-to 'show' id}} {{id}}  {{/link-to}}</li>
+			{{/each}}
+		</ul>
+
+		<h3>No Fans length:{{controller.no_fans.length}}</h3>
+		<ul class='list-group subject-list'>
+			{{#each  controller.no_fans}}
+				<li class='list-group-item'>{{#link-to 'show' id}} {{id}}  {{/link-to}}</li>
+			{{/each}}
+		</ul>
+	</div>
+
+
+	<div class='subject_viewer col-md-8 '>
+		{{outlet}}
+	</div>
+
+</div>
+
+
